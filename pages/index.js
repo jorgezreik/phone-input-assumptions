@@ -3,7 +3,6 @@ import { useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Confetti from "react-confetti";
-import useWindowSize from "react-use/lib/useWindowSize";
 
 export default function Home() {
   const [value, setValue] = useState(0);
@@ -30,11 +29,10 @@ export default function Home() {
     setConfetti(true);
   };
 
-  const { width, height } = useWindowSize();
-
   return (
     <>
-      <Confetti width={width} height={height} run={confetti} />
+      {/* Need to only run confetti on client side */}
+      {process.browser && <Confetti run={confetti} />}
       <div className="flex flex-col justify-between min-h-screen px-4 text-white w-100">
         <Head>
           <title>Phone Input Assumptions</title>
